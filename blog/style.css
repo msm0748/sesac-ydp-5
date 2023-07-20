@@ -1,0 +1,25 @@
+.custom caption {
+  overflow: hidden;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  background: 0 0;
+  font-size: 0;
+  color: transparent;
+  line-height: 0;
+}
+
+.custom table th {
+  text-align: center;
+  font-size: 16px;
+}
+
+.custom table ol {
+  margin: 0;
+}
+
+.custom table ol li {
+  word-break: keep-all;
+}
