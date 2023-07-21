@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>과제7</title>
+        <style>
+            body {
+                position: relative;
+            }
+            .body {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                position: absolute;
+            }
+            .body1 {
+                background-color: red;
+                position: relative;
+            }
+            .body1 * {
+                border-radius: 50%;
+                position: absolute;
+            }
+            .body1 .eye-white {
+                width: 30px;
+                height: 30px;
+                background-color: #fff;
+                top: 20px;
+                left: 25px;
+            }
+            .body1 .eye-black {
+                width: 15px;
+                height: 15px;
+                background-color: #000;
+                top: 7px;
+                left: 0;
+            }
+            .body2 {
+                background-color: orange;
+                top: 40px;
+                left: 75px;
+            }
+            .body3 {
+                background-color: yellow;
+                top: 80px;
+                left: 120px;
+            }
+            .body4 {
+                background-color: green;
+                top: 80px;
+                left: 170px;
+            }
+            .body5 {
+                background-color: blue;
+                top: 80px;
+                left: 220px;
+                z-index: 3;
+            }
+            img {
+                position: relative;
+                z-index: 2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="body body1">
+            <div class="eye-white">
+                <div class="eye-black"></div>
+            </div>
+        </div>
+        <div class="body body2"></div>
+        <div class="body body3"></div>
+        <div class="body body4"></div>
+        <div class="body body5"></div>
+
+        <img class="grass" src="./img/grass.png" alt="잔디" />
+    </body>
+</html>

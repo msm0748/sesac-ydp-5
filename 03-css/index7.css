@@ -1,0 +1,39 @@
+div {
+    width: 100px;
+    height: 100px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 100px;
+
+    position: absolute;
+}
+
+.div1 {
+    top: 100px;
+    left: 100px;
+    background-color: red;
+}
+
+.div2 {
+    top: 140px;
+    left: 140px;
+    background-color: orange;
+}
+
+.div3 {
+    top: 180px;
+    left: 180px;
+    background-color: yellow;
+}
+
+.div4 {
+    top: 220px;
+    left: 220px;
+    background-color: green;
+}
+
+.div5 {
+    top: 260px;
+    left: 260px;
+    background-color: blue;
+}
