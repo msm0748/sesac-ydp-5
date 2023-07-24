@@ -1,0 +1,45 @@
+.d-inline1 {
+    background-color: blue;
+}
+
+.d-inline2 {
+    background-color: red;
+}
+
+.d-block1 {
+    display: block;
+    background-color: blue;
+}
+
+.d-block2 {
+    display: block;
+    background-color: red;
+}
+
+.d-inline-block1 {
+    display: inline-blcok;
+    background-color: red;
+    width: 200px;
+    height: 300px;
+    /* margin: 20px; */
+    /* css 단축 프로퍼티 */
+    /* margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px; */
+    margin: 20px 40px;
+}
+
+.d-none {
+    display: none;
+    background-color: green;
+    width: 100px;
+    height: 100px;
+}
+
+.box {
+    visibility: hidden;
+    background-color: violet;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                font-weight: bold;
+            }
+            header {
+                background-color: gainsboro;
+                padding: 10px;
+                margin: 20px 0;
+            }
+
+            /* 과제 1 */
+            .header1 {
+                display: flex;
+                justify-content: space-between;
+            }
+            .header1 .menu {
+                display: flex;
+                column-gap: 15px;
+            }
+            /* 과제 2 */
+            .header2 .menu {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* 과제 3 */
+            .header3 {
+                display: flex;
+                justify-content: space-between;
+            }
+            .header3 .menu {
+                display: flex;
+            }
+            .header3 .menu li {
+                margin: 0 10px;
+            }
+
+            /* 과제 4 */
+            .header4 {
+                display: flex;
+                justify-content: space-between;
+            }
+            .header4 ul {
+                display: flex;
+                column-gap: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header1">
+            <div>LOGO</div>
+            <nav>
+                <ul class="menu">
+                    <li>MENU1</li>
+                    <li>MENU2</li>
+                    <li>MENU3</li>
+                </ul>
+            </nav>
+        </header>
+        <header class="header2">
+            <nav>
+                <ul class="menu">
+                    <li>MENU1</li>
+                    <li>MENU2</li>
+                    <li>MENU3</li>
+                </ul>
+            </nav>
+        </header>
+        <header class="header3">
+            <div class="logo">LOGO</div>
+            <nav>
+                <ul class="menu">
+                    <li>MENU1</li>
+                    <li>MENU2</li>
+                    <li>MENU3</li>
+                </ul>
+            </nav>
+            <div class="login">LOGIN</div>
+        </header>
+        <header class="header4">
+            <ul>
+                <li>LOGO</li>
+                <li>MENU1</li>
+                <li>MENU2</li>
+                <li>MENU3</li>
+            </ul>
+            <ul>
+                <li>LOGIN</li>
+                <li>SIGNUP</li>
+            </ul>
+        </header>
+    </body>
+</html>
