@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+            .box {
+                position: relative;
+                animation-name: box-anim;
+                animation-timing-function: ease-in-out;
+                animation-duration: 3s;
+            }
+            @keyframes box-anim {
+                0% {
+                    left: 100%;
+                    width: 200%;
+                }
+                100% {
+                    left: 0;
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta quae repellendus nemo id? Vero cumque
+            dolorum libero blanditiis tenetur iste adipisci ullam quisquam animi, ut velit expedita numquam sunt facere?
+        </div>
+    </body>
+</html>
