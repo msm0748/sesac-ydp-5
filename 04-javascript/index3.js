@@ -116,14 +116,139 @@ console.log(x); // undefined
 
 // [QUIZ] 변수
 // Q1. 코드 실행시 q1 변수는 어떤 값이 될까?
+// 정답 : 3 // 값을 계산만 하고 재할당 하지 않음
 let q1 = 3;
 q1 - 2;
 
 // Q2. 다음 코드 실행시 q2 변수는 어떤 값이 될까?
+// 정답 13 // 10 + 5 - 2
 let q2 = 10;
 q2 = q2 + 5;
 q2 = q2 - 2;
 
 // Q3. 다음 코드 실행시 q3 변수는 어떤 값이 될까?
+// error // const 는 상수인데 재할당을 시도 했음
 const q3 = 1;
-q3 = q3 + 1;
+// q3 = q3 + 1;
+
+// 6. array (배열)
+// 배열의 이름 : fruits
+// 배열의 원소(아이템): 배열 안에 있는 데이터 하나하나
+// 배열의 위치(index): 0부터 시작
+// 배열의 길이(크기): 원소의 개수와 동일
+const fruits = ['orange', 'pineapple', 'grape', 'apple'];
+// const fruits2 = new Array('orange', 'pineapple', 'grape');
+console.log(fruits);
+console.log(fruits[0]); // fruits 배열의 위치가 0인 원소 출력
+
+// js에서는 배열 원소의 자료형이 달라도 됨 !
+const data = [1, 'allie', false, null, undefined];
+console.log(data);
+
+// Array 안에 Array 들어갈 수 있음 (중첩 가능) => 2차원 배열
+const korean = [
+  ['가', '나', '다'],
+  ['라', '마', '바'],
+  ['사', '아', '자'],
+];
+console.log(korean);
+console.log(korean[0]);
+console.log(korean[1]);
+console.log(korean[2]);
+
+console.log(korean[0][2]); // '다'
+
+// 퀴즈 korean 배열에서 '가자' 글씨 출력하기
+console.log(korean[0][0] + korean[2][2]);
+
+// 퀴즈 3차원 배열에서 숫자 8 출력
+const nums = [
+  [
+    [1, 2, 3],
+    [4, 5, 6],
+  ],
+  [
+    [7, 8, 9],
+    [10, 11, 12],
+  ],
+];
+
+console.log(nums[1][0][1]);
+
+// 7. object (key: value)
+const cat = {
+  name: '나비',
+  age: 1,
+  isCute: true,
+  mew: function () {
+    return '냐용';
+  },
+};
+console.log(cat); // object 자체를 출력
+// object 의 속성(key)에 접근하는 방법
+// (1) 점 표기법
+console.log(cat.name);
+console.log(cat.age);
+console.log(cat.mew());
+// (2) 대괄호 표기법 ([])
+console.log(cat['name']);
+// key 가 변수에 저장되어 있을 때 주로 사용
+const tempVal = 'name';
+console.log(cat[tempVal]); // => cat['name'] => cat.name 과 동일
+
+// typeof : 자료형을 확인할 수 있는 키워드
+console.log(typeof 'ㅁ');
+console.log(typeof 12345);
+console.log(typeof 3.14);
+console.log(typeof true);
+console.log(typeof false);
+console.log(typeof null); // object # ** 공식적으로 인정한 언어 자체의 오류
+console.log(typeof undefined); // undefined
+console.log(typeof fruits); // object
+
+const me = {
+  name: 'seokmin',
+  isLeader: false,
+  job: 'jobless',
+  interests: ['music', 'walking'],
+};
+console.log(me);
+
+// 형변환
+// 성적 평균 구하는 프로그램 만들기
+// let mathScore = prompt('수학점수 입력');
+// let engScore = prompt('영어점수 입력');
+// let avg = (Number(mathScore) + Number(engScore)) / 2;
+// console.log(`수학과 영어의 평균 점수는 ${avg}점 입니다~ `);
+
+// 1. String(): 문자로 형변환
+let str1 = true;
+let str2 = 123;
+let str3 = null;
+
+console.log(String(str1), typeof String(str1)); // "true" string
+console.log(String(str2), typeof String(str2)); // "123" string
+console.log(String(str3), typeof String(str3)); // "null" string
+console.log(str1.toString(), typeof str1.toString()); //  "true" string
+
+// 2. Number(): 숫자로 형변환
+let n1 = true;
+let n2 = false;
+let n3 = '123.9';
+
+console.log(Number(n1), typeof Number(n1)); // 1
+console.log(Number(n2), typeof Number(n2)); // 0
+console.log(Number(n3), typeof Number(n3)); // 123.9
+console.log(parseInt(n3, 10)); // 10진수로 변환 (10진수는 생략 가능하지만 적는 걸 추천 !!)
+console.log(parseFloat(n3)); // n3 값을 실수(float)로 바꾸겠다 => 123.9
+
+// 실습 과제
+
+const mathScore = '77';
+const engScore = '88';
+const avgScore = (Number(mathScore) + Number(engScore)) / 2;
+console.log(avgScore);
+
+console.log(Number(undefined), typeof Number(undefined)); // NaN, number
+// Not-A-Number(숫자가 아님)
+console.log(Number(null), typeof Number(null)); // 0, number
