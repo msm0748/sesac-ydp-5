@@ -164,3 +164,12 @@ console.log(quiz2);
 
 const quiz3 = words.map((word) => word.indexOf('a') !== -1);
 console.log(quiz3);
+
+//////////////////////
+// for in 반복문
+// 객체의 key를 반복할 수 있는 구문
+
+const me = { name: 'sean', gender: 'f', hobby: 'movie' };
+for (let key in me) {
+  console.log(key, me[key]);
+}
