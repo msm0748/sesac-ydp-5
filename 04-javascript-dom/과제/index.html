@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과제1</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        padding: 40px;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <label for="value1">값1 : </label>
+        <input type="text" id="value1" onKeyUp="SetNum(this);" />
+      </li>
+      <li>
+        <label for="value2">값2 : </label>
+        <input type="text" id="value2" onKeyUp="SetNum(this);" />
+      </li>
+      <li>
+        <label for="operator">연산자 : </label>
+        <input type="text" id="operator" />
+      </li>
+      <li>
+        <label for="result">값 : </label>
+        <input type="text" id="result" />
+      </li>
+    </ul>
+    <div>
+      <button id="calculate">계산하기</button>
+      <button id="reset">초기화</button>
+    </div>
+    <script>
+      function SetNum(obj) {
+        val = obj.value;
+        re = /[^0-9]/gi;
+        obj.value = val.replace(re, '');
+      }
+      const calculate = document.getElementById('calculate');
+
+      calculate.addEventListener('click', () => {
+        const val1 = Number(document.getElementById('value1').value);
+        const val2 = Number(document.getElementById('value2').value);
+        const operator = document.getElementById('operator').value;
+        let result = 0;
+
+        switch (operator) {
+          case '+':
+            result = val1 + val2;
+            break;
+          case '-':
+            result = val1 - val2;
+            break;
+          case '/':
+            result = val1 / val2;
+            break;
+          case '*':
+            result = val1 * val2;
+            break;
+          default:
+            alert('사칙연산만 넣어주세요.');
+            break;
+        }
+        document.getElementById('result').value = result;
+      });
+      const reset = document.getElementById('reset');
+      reset.addEventListener('click', () => {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((el) => {
+          el.value = '';
+        });
+      });
+    </script>
+  </body>
+</html>

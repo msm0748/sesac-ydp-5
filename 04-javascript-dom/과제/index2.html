@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>방명록 만들기</title>
+    <style>
+      form > div {
+        margin-bottom: 5px;
+      }
+      form #desc {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>방명록 입니다.</div>
+    <form>
+      <div>
+        <label for="name">작성자</label>
+        <input type="text" id="name" />
+      </div>
+      <div>
+        <label for="desc">내용</label>
+        <input type="text" id="desc" />
+      </div>
+      <button type="submit" id="submit">작성</button>
+    </form>
+    <table border="1" width="800">
+      <colgroup>
+        <col width="70" />
+        <col width="100" />
+        <col width="450" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>작성자</th>
+          <th>내용</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const btn = document.getElementById('submit');
+      const table = document.querySelector('table tbody');
+      let num = 1;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const desc = document.getElementById('desc').value;
+        if (name.trim() === '') {
+          return alert('작성자를 입력해 주세요.');
+        }
+        if (desc.trim() === '') {
+          return alert('내용을 입력해 주세요.');
+        }
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDay();
+        const hour = date.getHours();
+        const min = date.getMinutes();
+
+        table.innerHTML += `<tr><td>${num}</td><td>${name}</td><td>${desc}</td><td>${year}-${month}-${day} ${hour} : ${min}</td></tr>`;
+
+        num++;
+        document.getElementById('name').value = '';
+        document.getElementById('desc').value = '';
+      });
+    </script>
+  </body>
+</html>
