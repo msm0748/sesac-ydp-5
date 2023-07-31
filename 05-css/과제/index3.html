@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과제3</title>
+    <style>
+      header {
+        height: 100px;
+        background-color: skyblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      header .img {
+        position: absolute;
+        left: 20%;
+      }
+      header .menus {
+        display: flex;
+        column-gap: 20px;
+        font-weight: bold;
+      }
+      @media all and (max-width: 768px) {
+        header {
+          height: 60px;
+          flex-direction: column;
+        }
+        header .menus {
+          position: absolute;
+          width: 100%;
+          top: 100%;
+          flex-direction: column;
+          align-items: center;
+          background-color: rgb(186, 226, 241);
+          font-weight: normal;
+        }
+        header .menus div {
+          margin: 10px 0;
+        }
+        header .img {
+          position: relative;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="img">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREAjnczyYmDG_CuBcjcZ8u8_Ntw3oTavu-Aw&usqp=CAU"
+          width="40"
+          height="40"
+          alt="귀여운 강아지"
+        />
+      </div>
+      <div class="menus">
+        <div>메뉴1</div>
+        <div>메뉴2</div>
+        <div>메뉴3</div>
+        <div>메뉴4</div>
+      </div>
+    </header>
+  </body>
+</html>

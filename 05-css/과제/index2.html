@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과제2</title>
+    <style>
+      .container {
+        display: flex;
+      }
+      .container .item {
+        background-color: #000;
+        border-radius: 10px;
+        width: 200px;
+        height: 200px;
+      }
+      .container .item + .item {
+        margin-left: 30px;
+      }
+      @media all and (max-width: 700px) {
+        .container {
+          flex-direction: column;
+        }
+        .container .item {
+          background-color: skyblue;
+          border: 1px solid rgb(250, 112, 135);
+        }
+        .container .item + .item {
+          margin-left: 0;
+          margin-top: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </body>
+</html>

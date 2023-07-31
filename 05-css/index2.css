@@ -1,0 +1,18 @@
+.box {
+  display: inline-block;
+  background-color: aliceblue;
+  width: 100px;
+  height: 100px;
+}
+
+.my_center {
+  background-color: pink;
+  width: 300px;
+}
+.my_width {
+  background-color: gold;
+}
+
+.my_height {
+  background-color: green;
+}
