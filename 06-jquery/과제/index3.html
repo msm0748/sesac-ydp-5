@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      td {
+        padding: 3px;
+        cursor: pointer;
+      }
+      td:hover {
+        background-color: skyblue;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        let thisTd;
+        $('td').on('click', function () {
+          const day = this.innerText;
+          $('#day').val(day);
+          thisTd = $(this);
+        });
+        $('button').on('click', function (e) {
+          e.preventDefault();
+          if (thisTd === undefined) {
+            alert('날짜를 선택하세요.');
+          } else {
+            const desc = $('#desc').val().trim();
+            if (desc === '') {
+              alert('내용을 입력하세요.');
+            }
+
+            thisTd.append(`<div>${desc}</div>`);
+            $('#desc').val('');
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="ko">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+      </head>
+      <body>
+        <form>
+          <div>
+            <label for="day">날짜 : </label>
+            <input type="text" id="day" disabled />
+          </div>
+          <div>
+            <label for="desc">내용 : </label>
+            <input type="text" id="desc" />
+          </div>
+          <button type="submit">작성</button>
+        </form>
+        <table style="text-align: center" width="500" cellspacing="20">
+          <caption style="color: green; font-size: 24px">
+            2022년 7월
+          </caption>
+
+          <thead>
+            <tr>
+              <td style="color: red">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td style="color: blue">土</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5"></td>
+              <td>1</td>
+              <td style="color: blue">2</td>
+            </tr>
+            <tr>
+              <td style="color: red">3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td style="color: blue">9</td>
+            </tr>
+            <tr>
+              <td style="color: red">10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td style="color: blue">16</td>
+            </tr>
+            <tr>
+              <td style="color: red">17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td style="color: blue">23</td>
+            </tr>
+            <tr>
+              <td style="color: red">24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td style="color: blue">30</td>
+            </tr>
+            <tr>
+              <td style="color: red">31</td>
+              <td colspan="6"></td>
+            </tr>
+          </tbody>
+        </table>
+      </body>
+    </html>
+  </body>
+</html>
