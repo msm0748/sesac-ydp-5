@@ -6,13 +6,17 @@ const PORT = 8080;
 app.set('view engine', 'ejs'); // express 템플릿 엔진 종류 드록
 app.set('views', './views'); // 템플릿 엔진 파일을 조장할 위치 등록
 
+// (임시) 데터이스에서 가온 회ㅓ 정보(id, pw)
+const idFromDB = 'banana';
+const pwdFromDB = '1234qwer';
+
 // app.get (경로, 해당 경로로 들어왔을 때 실행할 함수)
 app.get('/', function (req, res) {
   // res.send(x): x를 클라이언트한테 응답으로 보냄
   // res.send('<h1>Hello Express!!!</h1>');
 
   // res.render(ejs_filename): ejs file 이름을 찾아서 응답
-  res.render('index');
+  res.render('index', { userId: idFromDB, userPw: pwdFromDB, btns: ['사과', '오렌지', '키위'], isLogin: true });
 });
 
 app.get('/sesac', function (req, res) {
