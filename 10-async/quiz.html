@@ -8,33 +8,48 @@
   <body>
     <h1>콜백 지옥 예시</h1>
     <script>
-      //1. 1초 뒤에 body 태그의 색상을 빨간색으로 변경
-      function bgRed() {
-        const body = document.querySelector('body');
-        setTimeout(function () {
-          body.style.backgroundColor = 'red';
-        }, 1000);
+      // //1. 1초 뒤에 body 태그의 색상을 빨간색으로 변경
+      // function bgRed() {
+      //   const body = document.querySelector('body');
+      //   setTimeout(function () {
+      //     body.style.backgroundColor = 'red';
+      //   }, 1000);
+      // }
+
+      // bgRed();
+      // //2. 1초 뒤에 body 태그의 색상을 빨 -> 1초뒤 2주
+      // function quiz() {
+      //   const body = document.querySelector('body');
+      //   body.style.backgroundColor = 'red';
+      //   setTimeout(function () {
+      //     body.style.backgroundColor = 'orange';
+      //     setTimeout(function () {
+      //       body.style.backgroundColor = 'yellow';
+      //       setTimeout(function () {
+      //         body.style.backgroundColor = 'green';
+      //         setTimeout(function () {
+      //           body.style.backgroundColor = 'blue';
+      //         }, 1000);
+      //       }, 1000);
+      //     }, 1000);
+      //   }, 1000);
+      // }
+      // quiz();
+
+      function bgColor(color) {
+        return new Promise((resolve) =>
+          setTimeout(() => {
+            document.body.style.backgroundColor = color;
+            resolve();
+          }, 1000)
+        );
       }
 
-      bgRed();
-      //2. 1초 뒤에 body 태그의 색상을 빨 -> 1초뒤 2주
-      function quiz() {
-        const body = document.querySelector('body');
-        body.style.backgroundColor = 'red';
-        setTimeout(function () {
-          body.style.backgroundColor = 'orange';
-          setTimeout(function () {
-            body.style.backgroundColor = 'yellow';
-            setTimeout(function () {
-              body.style.backgroundColor = 'green';
-              setTimeout(function () {
-                body.style.backgroundColor = 'blue';
-              }, 1000);
-            }, 1000);
-          }, 1000);
-        }, 1000);
-      }
-      quiz();
+      bgColor('red')
+        .then(() => bgColor('orange'))
+        .then(() => bgColor('yellow'))
+        .then(() => bgColor('green'))
+        .then(() => bgColor('blue'));
     </script>
   </body>
 </html>
