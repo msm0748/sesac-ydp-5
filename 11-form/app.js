@@ -47,7 +47,7 @@ app.get('/quiz', (req, res) => {
 });
 
 app.get('/quizGetForm', (req, res) => {
-  res.render('quizResult', { title: '당신의 정보는 !!', userInfo: req.body });
+  res.render('quizResult', { title: '당신의 정보는 !!', userInfo: req.query });
 });
 
 app.listen(PORT, () => {

@@ -16,10 +16,12 @@
   font-size: 16px;
 }
 
-.custom table ol {
+.custom table ol,
+.custom table ul {
   margin: 0;
 }
 
-.custom table ol li {
+.custom table ol li,
+.custom table ul li {
   word-break: keep-all;
 }
