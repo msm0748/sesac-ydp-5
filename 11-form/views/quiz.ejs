@@ -25,16 +25,23 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <form action="/quizGetForm" class="m-lg-3">
+    <form action="/quizPostForm" method="post" class="m-lg-3">
       <fieldset>
         <label for="exampleFormControlInput1" class="form-label">이름</label>
-        <input type="text" name="name" class="form-control w-25" id="exampleFormControlInput1" placeholder="문석민" />
+        <input
+          type="text"
+          name="name"
+          class="form-control w-25"
+          id="exampleFormControlInput1"
+          placeholder="문석민"
+          required
+        />
       </fieldset>
 
       <fieldset class="mt-4">
         <p>성별</p>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="남자" />
+          <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="남자" required />
           <label class="form-check-label" for="inlineRadio1">남자</label>
         </div>
         <div class="form-check form-check-inline">
@@ -86,6 +93,10 @@
           <input class="form-check-input" name="hobby" type="checkbox" id="inlineCheckbox3" value="음식" />
           <label class="form-check-label" for="inlineCheckbox3">음식</label>
         </div>
+      </fieldset>
+      <fieldset>
+        <p>선택</p>
+        <input type="color" name="color" />
       </fieldset>
       <button type="submit" class="btn btn-primary mt-4">전송</button>
     </form>

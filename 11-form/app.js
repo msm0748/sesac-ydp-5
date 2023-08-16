@@ -46,8 +46,8 @@ app.get('/quiz', (req, res) => {
   res.render('quiz', { title: '퀴즈를 풀어보자!' });
 });
 
-app.get('/quizGetForm', (req, res) => {
-  res.render('quizResult', { title: '당신의 정보는 !!', userInfo: req.query });
+app.post('/quizPostForm', (req, res) => {
+  res.render('quizResult', { title: '당신의 정보는 !!', userInfo: req.body });
 });
 
 app.listen(PORT, () => {
