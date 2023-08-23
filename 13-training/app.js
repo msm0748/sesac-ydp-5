@@ -37,6 +37,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/test', (req, res) => {
+  res.send({ desc: '난 객체다' });
+});
+
 app.post('/signUp', uploadDetail.single('userfile'), (req, res) => {
   console.log(req.file); // { 파일_정보 }
   console.log(req.body);
