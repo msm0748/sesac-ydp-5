@@ -101,13 +101,13 @@ INSERT INTO orders VALUES(NULL, 'jy9987', '오징어집', 1700, 5);
 INSERT INTO orders VALUES(NULL, 'jjjeee', '바나나킥', 2000, 4);
 INSERT INTO orders VALUES(NULL, 'imminji01', '초코파이', 5000, 2);
 
--- 모든 고객의 아이디 검색
+-- 모든 고객의 아이디를 검색
 select custid from customer;
 
 -- 모든 고객의 아이디, 생년월일 검색
 select custid, birth from customer;
 
--- 모든 고객의 생년월일, 아이디 검색 (순서 있음)
+-- 모든 고객의 생년원일, 아이디 검색 (순서 있음)
 select birth, custid from customer;
 
 -- 모든 고객의 아이디, 이름, 주소, 전화번호, 생년월일 검색
@@ -132,7 +132,7 @@ select distinct addr from customer;
 -- 복합조건: AND, OR, NOT
 
 -- 비교
--- 고객 이름이 강해린인 고객을 생일 검색
+-- 고객 이름이 강해린인 고객의 생일 검색
 select birth from customer where custname='강해린';
 
 -- 고객 이름이 강해린이 아닌 고객들의 생일 검색
@@ -146,7 +146,6 @@ select * from customer where custname > '박민지';
 select * from customer where birth between '1995-01-01' and '2000-12-31';
 select * from customer where birth >= '1995-01-01' and birth <= '2000-12-31';
 
-
 -- 집합
 -- 주소가 서울 혹은 런던인 고객 검색
 select * from customer where addr in ('대한민국 서울', '영국 런던');
@@ -155,26 +154,24 @@ select * from customer where addr = '대한민국 서울' or addr = '영국 런�
 select * from customer where addr not in ('대한민국 서울', '영국 런던');
 
 
-
 -- 패턴
 -- 주소가 '미국 로스앤젤레스'인 고객을 검색
 select * from customer where addr like '미국 로스앤젤레스';
 
--- 주소에 '미국'이 포함되어 있는 고객 검색
+-- 주소에 '미국'이 포함되어 있는 고객 검색 (미국에 사는 사람)
 -- %: 0개 이상 문자열
 select * from customer where addr like '미국%';
 
 -- 고객 이름 두번째 글자가 '지'인 고객 검색
 -- _: 임의의 하나의 문자
-select * from customer where custname like ('_지%');
+select * from customer where custname like '_지%';
 -- 참고
-select * from customer where custname like ('_지'); -- 검색 결과 0
-
+select * from customer where custname like '_지'; -- 검색 결과 0
 
 -- 고객 이름 세번째 글자가 '수'인 고객
-select * from customer where custname like ('__수%');
+select * from customer where custname like '__수%';
 -- 참고
-select * from customer where custname like ('%수'); -- 이름이 몇자든 마지막글자가 수이면 다 선택
+select * from customer where custname like '%수'; -- 이름이 몇자든 마지막글자가 수이면 다 선택
 
 
 -- 복합조건 (AND, OR, NOT)
@@ -184,6 +181,110 @@ select * from customer where addr like '대한민국%' and birth >= '2000-01-01'
 -- 주소지가 미국이거나 영국인 고객 검색
 select * from customer where addr like '미국%' or addr like '영국%';
 
-
 -- 휴대폰 번호 마지막 자리가 4가 아닌 고객 검색
-select * from customer where phone not like '%_4';
+select * from customer where phone NOT LIKE '%_4';
+
+-- < ORDER BY > 
+-- order by 없음: pk 기준 오름차순 정렬
+select * from customer;
+
+select * from customer order by custname;
+
+select * from customer order by custname desc;
+
+-- where 절과 order by 함께 사용 (단, 이 때 order by 가 where 보다 뒤에 위치해야 함)
+-- 2000년생 이후 출생자 중에서 주소를 기준으로 내림차순 검색
+select * from customer where birth >= '2000-01-01' order by addr desc;
+-- select * from customer order by addr desc where birth >= '2000-01-01'; -- error: 구문 순서 오류
+
+
+-- 2000년생 이후 출생자 중에서 주소를 기준으로 내림차순 그리고 아이디를 기준으로 내림차순 검색
+select * from customer where birth >= '2000-01-01' order by addr desc, custid desc;
+
+-- 2000년생 이후 출생자 중에서 주소를 기준으로 오름차순 그리고 아이디를 기준으로 내림차순 검색
+select * from customer where birth >= '2000-01-01' order by addr, custid desc;
+
+-- < LIMIT >
+-- 행의 개수를 제한
+select * from customer where birth >= '2000-01-01' limit 2;
+select * from customer limit 3;
+
+-- < 집계 함수 > 
+-- 계산하여 어떤 값을 리턴하는 "함수"
+-- group by 절과 함께 쓰이는 케이스가 많음
+select * from orders;
+
+-- 주문 테이블에서 상품의 총 판매 개수 검색
+select sum(amount) from orders;
+
+-- 주문 테이블에서 총 판매 개수 검색 + 의미있는 열이름으로 변경 
+select sum(amount) as 'total_amount' from orders;
+
+-- 주문 테이블에서 총 판매 개수, 평균 판매 개수, 상품 최저가, 상품 최고가 검색
+-- avg_amount, min_price, max_price
+select sum(amount) as 'total_amount', 
+	avg(amount) as 'avg_amount', 
+	min(price) as 'min_amount', 
+	max(price) as 'max_amount' 
+from orders;
+    
+-- 주문 테이블에서 총 주문 건수 (= 튜플 개수)
+select count(*) from orders;
+
+-- 주문 테이블에서 주문한 고객 수 (중복 없이)
+select count(distinct custid) from orders;
+
+-- < GROUP BY >
+-- "~별로"
+
+-- 고객별로 주문한 주문 건수 구하기
+select custid, count(*) from orders group by custid;
+
+-- 고객별로 주문한 상품 총 수량 구하기
+select custid, sum(amount) from orders group by custid;
+
+-- 고객별로 주문한 총 주문액 구하기
+select custid, sum(price * amount) from orders group by custid;
+
+-- 상품별 판매 개수 구하기
+select prodname, sum(amount) from orders group by prodname;
+
+-- < HAVING >
+-- group by 절 이후 추가 조건
+
+
+-- 총 주문액이 10,000원 이상인 고객에 대해서 고객별로 주문한 상품 총 수량 구하기
+select custid, sum(amount), sum(price * amount) from orders group by custid having sum(price * amount) >= 10000;
+
+
+/*
+select custid, sum(amount), sum(price * amount) from orders 
+  sum(price * amount) >= 10000
+  group by custid; -- error code 1111. group 함수 잘못 사용
+*/
+
+-- 총 주문액이 10,000원 이상인 고객에 대해서 고객별로 주문한 상품 총 수량 구하기
+-- (단, custid가 'bunny'인 고객은 제외하고 출력할 것)
+-- where, group by, having 모두 사용한 예시
+select custid, sum(amount), sum(price * amount) from orders
+  where custid != 'bunny'
+  group by custid
+  having sum(price * amount) >= 10000;
+
+-- group by 주의 사항
+-- select 절에서 group by 에서 사용한 속성과 잡계함수만 사용 가능
+select custid, count(*) from orders group by custid;
+
+/*
+where vs having
+
+having
+- 그룹에 대해서 필터링 (그래서 group by 함께 쓰임)
+- group by 보다 뒤에 위치
+- 집계함수랑 함께 사용 가능
+
+where
+- 각각의 행을 필터링
+- group by 보다 앞에 위치
+- 집계함수를 쓸 수 있으나 having 처럼 자유롭게 쓸 수는 없음
+*/
