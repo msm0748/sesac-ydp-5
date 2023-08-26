@@ -1,35 +1,19 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const PORT = 8000;
 
+app.set('views', path.join(__dirname + '/views')); //
 app.set('view engine', 'ejs');
-app.use('/views', express.static(__dirname + '/views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.render('dynamic');
-});
+const indexRouter = require('./routes/index.js');
+app.use(indexRouter);
 
-app.get('/quiz', (req, res) => {
-  res.render('dynamic2');
-});
-
-app.get('/axios', (req, res) => {
-  res.send(req.query);
-});
-
-const id = 'banana';
-const pw = '4321';
-
-app.post('/axios', (req, res) => {
-  console.log(req.body);
-  if (req.body.userId === id && req.body.userPw === pw) {
-    res.send({ isSuccess: true, userId: req.body.userId });
-  } else {
-    res.send({ isSuccess: false });
-  }
+app.get('*', (req, res) => {
+  res.render('404');
 });
 
 app.listen(PORT, () => {
