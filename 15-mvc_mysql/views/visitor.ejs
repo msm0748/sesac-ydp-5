@@ -10,15 +10,13 @@
   <!-- axios cdn -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- jquery cdn -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
   <style>
     body {
       background-color: rgb(236, 242, 254);
     }
   </style>
+
+  <script defer src="../static/js/visitor.js"></script>
 </head>
 
 <body>
@@ -28,7 +26,7 @@
       <input type="text" id="name" placeholder="사용자 이름" /> <br />
       <input type="text" id="comment" placeholder="방명록" /> <br />
       <div id="button-group">
-        <button type="button">등록</button>
+        <button type="button" onclick="createVisitor()">등록</button>
       </div>
     </fieldset>
   </form>
