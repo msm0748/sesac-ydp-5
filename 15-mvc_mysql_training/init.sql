@@ -2,7 +2,7 @@
 SHOW databases;
 
 -- codingon 데이터베이스 선택
-USE codingon;
+USE sesac;
 
 -- codingon 데이터베이스의 테이블 목록 확인
 SHOW tables;
