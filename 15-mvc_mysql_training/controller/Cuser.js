@@ -50,6 +50,13 @@ exports.postProfile = (req, res) => {
   });
 };
 
+// edit profile
+exports.putProfile = (req, res) => {
+  User.putProfile(req.body, (result) => {
+    res.send(result);
+  });
+};
+
 // delete profile
 exports.deleteProfile = (req, res) => {
   User.deleteProfile(req.body, (result) => {

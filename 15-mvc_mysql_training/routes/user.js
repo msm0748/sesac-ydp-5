@@ -11,6 +11,7 @@ router.get('/signin', controller.getSignin);
 router.post('/signin', controller.postSignin);
 
 router.post('/profile', controller.postProfile);
+router.put('/profile', controller.putProfile);
 router.delete('/profile', controller.deleteProfile);
 
 module.exports = router;

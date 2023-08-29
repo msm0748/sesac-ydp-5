@@ -25,7 +25,28 @@
     <script>
       // TODO: [Login] 버튼 클릭시 서버에 회원 정보 수정 요청하기
       // POST /user/profile/edit
-      function profileEdit() { }
+      function profileEdit() {
+        const form = document.forms['form_profile'];
+
+        const id = form.id.value;
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+        axios({
+          method: 'put',
+          url: '/user/profile',
+          data: {
+            id,
+            userid,
+            pw,
+            name
+          }
+        }).then((response) => {
+          if (response.data) return alert('수정 완료');
+        }).catch((err) => {
+          console.log('Error', err);
+        })
+      }
 
       // TODO: [Login] 버튼 클릭시 서버에 회원 정보 삭제 요청하기
       // POST /user/profile/delete

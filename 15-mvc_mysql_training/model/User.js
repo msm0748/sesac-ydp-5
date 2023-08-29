@@ -35,6 +35,14 @@ exports.postProfile = (data, cb) => {
   });
 };
 
+exports.putProfile = (data, cb) => {
+  const { id, userid, pw, name } = data;
+  db.query(`UPDATE user SET userid="${userid}", name="${name}", pw="${pw}" WHERE id="${id}"`, (err, result) => {
+    if (err) throw err;
+    cb(true);
+  });
+};
+
 exports.deleteProfile = (data, cb) => {
   const { id } = data;
   db.query(`delete from user where id=${id}`, (err, result) => {
