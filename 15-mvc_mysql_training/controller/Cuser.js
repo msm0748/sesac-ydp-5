@@ -1,4 +1,5 @@
 // TODO: 컨트롤러 코드
+const User = require('../model/User');
 
 // main view
 exports.main = (req, res) => {
@@ -8,6 +9,13 @@ exports.main = (req, res) => {
 // signup view
 exports.getSignup = (req, res) => {
   res.render('signup');
+};
+
+// signup logic
+exports.postSignup = (req, res) => {
+  User.postSignup(req.body, (result) => {
+    res.send(result);
+  });
 };
 
 // signin view

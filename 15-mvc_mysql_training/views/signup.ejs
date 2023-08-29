@@ -19,7 +19,41 @@
     <script>
       // TODO: [Register] 버튼 클릭시 서버에 회원가입 요청하기
       // POST /user/signup
-      function register() { }
+      function register() {
+        const form = document.forms['form_register'];
+
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+
+        if (userid.length > 20) {
+          return alert('id 값은 20자리 이하 입니다.')
+        }
+        if (pw.length > 20) {
+          return alert('pw 값은 20자리 이하 입니다.')
+        }
+        if (name.length > 10) {
+          return alert('name 값은 10자리 이하 입니다.')
+        }
+
+        axios({
+          method: 'post',
+          url: '/user/signup',
+          data: {
+            userid,
+            pw,
+            name
+          }
+        }).then((response) => {
+          console.log(response.data)
+          if (response.data) {
+            alert('회원가입에 성공하셨습니다.');
+            document.location.href = '/user/signin';
+          }
+        }).catch((err) => {
+          console.log('Error', err);
+        })
+      }
     </script>
   </body>
 
