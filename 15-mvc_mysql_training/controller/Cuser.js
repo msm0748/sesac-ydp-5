@@ -33,3 +33,19 @@ exports.postSignin = (req, res) => {
     }
   });
 };
+
+// profile view
+exports.postProfile = (req, res) => {
+  console.log(req.body); // userid = db의 id 값
+  User.postProfile(req.body, (result) => {
+    console.log(result[0].id);
+    res.render('profile', {
+      user: {
+        id: result[0].id,
+        userid: result[0].userid,
+        pw: result[0].pw,
+        name: result[0].name,
+      },
+    });
+  });
+};

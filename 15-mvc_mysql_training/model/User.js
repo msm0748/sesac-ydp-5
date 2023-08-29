@@ -25,3 +25,12 @@ exports.postSignin = (data, cb) => {
     cb(result);
   });
 };
+
+exports.postProfile = (data, cb) => {
+  const { userid } = data;
+  db.query(`SELECT * FROM user WHERE id="${userid}"`, (err, result) => {
+    if (err) throw err;
+    cb(result);
+    // console.log(result);
+  });
+};
