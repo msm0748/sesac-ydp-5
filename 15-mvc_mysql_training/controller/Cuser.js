@@ -49,3 +49,10 @@ exports.postProfile = (req, res) => {
     });
   });
 };
+
+// delete profile
+exports.deleteProfile = (req, res) => {
+  User.deleteProfile(req.body, (result) => {
+    res.send(result);
+  });
+};

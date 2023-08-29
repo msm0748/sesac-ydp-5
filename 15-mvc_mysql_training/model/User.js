@@ -34,3 +34,11 @@ exports.postProfile = (data, cb) => {
     // console.log(result);
   });
 };
+
+exports.deleteProfile = (data, cb) => {
+  const { id } = data;
+  db.query(`delete from user where id=${id}`, (err, result) => {
+    if (err) throw err;
+    cb(true);
+  });
+};

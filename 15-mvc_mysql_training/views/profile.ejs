@@ -29,7 +29,32 @@
 
       // TODO: [Login] 버튼 클릭시 서버에 회원 정보 삭제 요청하기
       // POST /user/profile/delete
-      function profileDelete() { }
+      function profileDelete() {
+        if (!confirm('정말로 삭제하나요?')) {
+          // !false => true
+          return;
+        }
+        const form = document.forms['form_profile'];
+
+        const id = form.id.value;
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+
+        axios({
+          method: 'delete',
+          url: '/user/profile',
+          data: {
+            id
+          }
+        }).then((response) => {
+          if (response.data) {
+            alert('회원 탈퇴 성공');
+            return document.location.href = '/user';
+          }
+        }).catch((err) => console.log('Error', err))
+
+      }
     </script>
   </body>
 
