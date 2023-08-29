@@ -17,3 +17,11 @@ exports.postSignup = (data, cb) => {
     cb(true);
   });
 };
+
+exports.postSignin = (data, cb) => {
+  const { userid, pw } = data;
+  db.query(`SELECT * FROM user WHERE userid="${userid}" AND pw="${pw}"`, (err, result) => {
+    if (err) throw err;
+    cb(result);
+  });
+};

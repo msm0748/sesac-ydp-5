@@ -22,3 +22,14 @@ exports.postSignup = (req, res) => {
 exports.getSignin = (req, res) => {
   res.render('signin');
 };
+
+// signin logic
+exports.postSignin = (req, res) => {
+  User.postSignin(req.body, (result) => {
+    if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send(false);
+    }
+  });
+};
