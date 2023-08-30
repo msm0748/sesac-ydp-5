@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('include/include', { title: '회원 정보' })%>
+
+  <body class="green">
+    <div class="container">
+      <div class="form">
+        <h1>회원 정보</h1>
+        <!-- TODO: href 속성값 설정하기 -->
+        <!-- <a href="#">HOME</a> -->
+        <p class="warning">* ID 수정 불가능, Password, Name 수정 가능</p>
+
+        <!-- TODO: 각 input의 value 값을 로그인 한 사람의 정보로 채우기 -->
+        <form name="form_profile">
+          <label for="userid">ID</label>
+          <input type="hidden" name="id" id="id" value="<%= user.id %>" />
+          <!-- readonly: userid는 수정 불가능 (조건임) -->
+          <input id="userid" type="text" name="userid" value="<%= user.userid %>" readonly /><br />
+          <label for="password">Password</label>
+          <input id="password" type="password" name="pw" value="<%= user.pw %>" required /><br />
+          <label for="name">Name</label>
+          <input id="name" type="text" name="name" value="<%= user.name %>" required /><br />
+          <div class="btn_group">
+            <input type="button" class="button" onclick="profileEdit();" value="Edit" />
+            <input type="button" class="button delete" onclick="profileDelete();" value="Delete" />
+          </div>
+        </form>
+        <p><a href="/user">HOME</a></p>
+
+      </div>
+
+    </div>
+
+    <script>
+      // TODO: [Login] 버튼 클릭시 서버에 회원 정보 수정 요청하기
+      // POST /user/profile/edit
+      function profileEdit() {
+        const form = document.forms['form_profile'];
+
+        const id = form.id.value;
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+        axios({
+          method: 'put',
+          url: '/user/profile',
+          data: {
+            id,
+            userid,
+            pw,
+            name
+          }
+        }).then((response) => {
+          if (response.data) return alert('수정 완료');
+        }).catch((err) => {
+          console.log('Error', err);
+        })
+      }
+
+      // TODO: [Login] 버튼 클릭시 서버에 회원 정보 삭제 요청하기
+      // POST /user/profile/delete
+      function profileDelete() {
+        if (!confirm('정말로 삭제하나요?')) {
+          // !false => true
+          return;
+        }
+        const form = document.forms['form_profile'];
+
+        const id = form.id.value;
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+
+        axios({
+          method: 'delete',
+          url: '/user/profile',
+          data: {
+            id
+          }
+        }).then((response) => {
+          if (response.data) {
+            alert('회원 탈퇴 성공');
+            return document.location.href = '/user';
+          }
+        }).catch((err) => console.log('Error', err))
+
+      }
+    </script>
+  </body>
+
+</html>

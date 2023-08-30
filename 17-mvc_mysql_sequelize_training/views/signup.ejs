@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('include/include', { title: '회원가입' })%>
+
+  <body class="green">
+    <div class="container">
+      <div class="registration form">
+        <h1>회원가입</h1>
+        <form name="form_register">
+          <label for="userid">ID</label>
+          <input id="userid" type="text" name="userid" required /><br />
+          <label for="password">Password</label>
+          <input id="password" type="password" name="pw" required /><br />
+          <label for="nickname">Name </label>
+          <input id="nickname" type="text" name="name" required /><br />
+          <input type="button" class="button" onclick="register();" value="Register" />
+        </form>
+
+        <!-- TODO: href 속성값 설정하기 -->
+        <div class="signup">
+          <span class="signup">Already have an account?
+            <a href="/user/signin">Login</a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      // TODO: [Register] 버튼 클릭시 서버에 회원가입 요청하기
+      // POST /user/signup
+      function register() {
+        const form = document.forms['form_register'];
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const userid = form.userid.value;
+        const pw = form.pw.value;
+        const name = form.name.value;
+
+        if (userid.length > 20) {
+          return alert('id 값은 20자리 이하 입니다.')
+        }
+        if (pw.length > 20) {
+          return alert('pw 값은 20자리 이하 입니다.')
+        }
+        if (name.length > 10) {
+          return alert('name 값은 10자리 이하 입니다.')
+        }
+
+        axios({
+          method: 'post',
+          url: '/user/signup',
+          data: {
+            userid,
+            pw,
+            name
+          }
+        }).then((response) => {
+          console.log(response.data)
+          if (response.data) {
+            alert('회원가입에 성공하셨습니다.');
+            document.location.href = '/user/signin';
+          }
+        }).catch((err) => {
+          console.log('Error', err);
+        })
+      }
+    </script>
+  </body>
+
+</html>
