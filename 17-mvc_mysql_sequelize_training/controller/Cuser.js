@@ -1,5 +1,5 @@
 // TODO: 컨트롤러 코드
-const User = require('../model/User');
+const { User } = require('../models');
 
 // main view
 exports.main = (req, res) => {
@@ -12,10 +12,14 @@ exports.getSignup = (req, res) => {
 };
 
 // signup logic
-exports.postSignup = (req, res) => {
-  User.postSignup(req.body, (result) => {
-    res.send(result);
+exports.postSignup = async (req, res) => {
+  const { userid, pw, name } = req.body;
+  const result = await User.create({
+    userid,
+    pw,
+    name,
   });
+  res.send(result);
 };
 
 // signin view
@@ -24,42 +28,59 @@ exports.getSignin = (req, res) => {
 };
 
 // signin logic
-exports.postSignin = (req, res) => {
-  User.postSignin(req.body, (result) => {
-    if (result.length > 0) {
-      res.send(result);
-    } else {
-      res.send(false);
-    }
-  });
+exports.postSignin = async (req, res) => {
+  const { userid, pw } = req.body;
+
+  try {
+    const result = await User.findOne({
+      where: { userid, pw },
+    });
+    res.send(result);
+  } catch (err) {
+    res.send(false);
+  }
 };
 
 // profile view
-exports.postProfile = (req, res) => {
-  console.log(req.body); // userid = db의 id 값
-  User.postProfile(req.body, (result) => {
-    console.log(result[0].id);
-    res.render('profile', {
-      user: {
-        id: result[0].id,
-        userid: result[0].userid,
-        pw: result[0].pw,
-        name: result[0].name,
-      },
-    });
+exports.postProfile = async (req, res) => {
+  const { userid } = req.body;
+  const result = await User.findOne({
+    where: { id: userid },
+  });
+
+  res.render('profile', {
+    user: {
+      id: result.id,
+      userid: result.userid,
+      pw: result.pw,
+      name: result.name,
+    },
   });
 };
 
 // edit profile
-exports.putProfile = (req, res) => {
-  User.putProfile(req.body, (result) => {
-    res.send(result);
-  });
+exports.putProfile = async (req, res) => {
+  const { id, userid, pw, name } = req.body;
+  const result = await User.update(
+    {
+      userid,
+      pw,
+      name,
+    },
+    {
+      where: {
+        id,
+      },
+    }
+  );
+  res.send(true);
 };
 
 // delete profile
-exports.deleteProfile = (req, res) => {
-  User.deleteProfile(req.body, (result) => {
-    res.send(result);
+exports.deleteProfile = async (req, res) => {
+  const { id } = req.body;
+  const result = await User.destroy({
+    where: { id },
   });
+  res.send(true);
 };

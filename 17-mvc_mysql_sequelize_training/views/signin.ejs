@@ -53,8 +53,8 @@
           console.log(response)
           if (response.data) {
             alert('로그인 성공');
-            console.log(response.data[0])
-            form_info.userid.value = response.data[0].id; // form_info 요소에 userid 속성값으로 'xx'를 저장 
+            console.log(response.data)
+            form_info.userid.value = response.data.id; // form_info 요소에 userid 속성값으로 'xx'를 저장 
             form_info.submit(); // form_info 폼을 제출
           } else {
             alert('아이디나 패스워드를 다시 한번 확인해주세요.');
