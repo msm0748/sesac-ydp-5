@@ -16,7 +16,7 @@ exports.getVisitors = (callback) => {
   //   ];
 
   // [after]
-  conn.query('select * from visitor', (err, rows) => {
+  conn.query('select * from visitor ORDER BY id DESC', (err, rows) => {
     if (err) {
       throw err;
     }
@@ -50,5 +50,22 @@ exports.deleteVisitor = (id, callback) => {
 
     console.log('model >> ', rows);
     callback(true); // { id: id }로 쓸 수도 있음
+  });
+};
+
+exports.getVisitor = (id, cb) => {
+  conn.query(`select * from visitor where id = ${id}`, (err, result) => {
+    if (err) throw err;
+    cb(result[0]);
+  });
+};
+
+exports.updateVisitor = (updateData, cb) => {
+  const { id, name, comment } = updateData;
+  const sql = `update visitor set name="${name}", comment="${comment}" where id=${id}`;
+  conn.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    cb();
   });
 };
