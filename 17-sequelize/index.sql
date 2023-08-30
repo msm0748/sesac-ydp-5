@@ -14,6 +14,8 @@ CREATE TABLE visitor (
 
 DESC visitor;
 
+DROP TABLE visitor;
+
 insert into visitor values 
 	(1, '홍길동', '내가 왔다.'),
 	(2, '이찬혁', '으라차차');
