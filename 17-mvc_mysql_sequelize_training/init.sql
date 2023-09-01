@@ -9,6 +9,7 @@ SHOW tables;
 
 -- 이미 user 테이블이 있다면 기존 테이블 지움
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS visitor;
 
 -- TODO: user 데이터베이스 생성
 CREATE TABLE user (

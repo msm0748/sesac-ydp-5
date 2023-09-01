@@ -4,9 +4,8 @@ const PORT = 8080;
 
 // express 템플릿 엔진 종류 등록
 app.set('view engine', 'ejs'); // express 템플릿 엔진 종류 드록
-// app.set('views', './views'); // 템플릿 엔진 파일을 조장할 위치 등록
+app.set('views', './views'); // 템플릿 엔진 파일을 조장할 위치 등록
 //static 미들웨어 등록
-app.use('/views', express.static(__dirname + '/views'));
 app.use('/public', express.static(__dirname + '/static'));
 // app.use('/public',  실제 url에 접속했을 때 보여줄 주소
 // express.static(__dirname + '/static')); 서버에서 제공해줄 주소
