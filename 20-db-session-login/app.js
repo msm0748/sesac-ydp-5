@@ -22,11 +22,6 @@ app.use(
   })
 );
 
-app.use('/', (req, res, next) => {
-  console.log(req.session.userName);
-  next();
-});
-
 const indexRouter = require('./routes/user');
 app.use(indexRouter);
 
