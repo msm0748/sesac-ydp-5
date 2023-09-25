@@ -3,19 +3,18 @@
 // sequelize 모듈 호출
 const { Sequelize, DataTypes } = require('sequelize');
 
-const config = require(__dirname + '/../config/config.json')['development'];
+const dbConfig = require('../config/db');
 
 const db = {};
 
 const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config // {}
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  dbConfig // {}
 );
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 db.User = require('./User')(sequelize, DataTypes);
 

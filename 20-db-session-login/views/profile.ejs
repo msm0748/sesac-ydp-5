@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= user.name %>님 프로필 정보</h1>
+
+    <form name="edit-profile">
+      <input type="text" id="userid" value="<%= user.userid %>" readonly="" /><br />
+      <input type="text" id="name" value="<%= user.name %>" /><br />
+      <input type="password" id="pw" value="<%= user.pw %>" /><br />
+      <input type="hidden" id="id" value="<%= user.id %>" /><br />
+      <button type="button" onclick="edit()">수정</button>
+      <button type="button" onclick="destroy()">회원탈퇴</button>
+    </form>
+
+    <br />
+    <a href="/">홈</a>
+
+    <script>
+      function edit() {
+        const form = document.forms['edit-profile'];
+        const dataToSend = {
+          id: Number(form.id.value),
+          userid: form.userid.value,
+          name: form.name.value,
+          pw: form.pw.value,
+        };
+
+        fetch('/profile/edit', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataToSend),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.result) {
+              document.location.reload();
+            }
+          });
+      }
+
+      function destroy() {
+        if (!confirm('회원탈퇴 하시겠습니까?')) return;
+
+        const form = document.forms['edit-profile'];
+        const dataToSend = {
+          id: Number(form.id.value),
+        };
+
+        fetch('/destroy', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataToSend),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.result) {
+              alert('회원탈퇴 완료되었습니다');
+              document.location.href = '/';
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
