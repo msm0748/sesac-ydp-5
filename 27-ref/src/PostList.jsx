@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import PostItem from './PostItem';
-import PropTypes from 'prop-types';
 
 const fakePosts = [
   {
@@ -74,7 +73,3 @@ export default function PostList() {
     </div>
   );
 }
-
-PostList.propTypes = {
-  posts: PropTypes.array,
-};
