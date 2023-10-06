@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  background: rgb(226, 226, 247);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}

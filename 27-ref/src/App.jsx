@@ -1,3 +1,4 @@
+import PostList from './PostList';
 import LifeCycleClass from './LifeCycleClass';
 import LifeCycleFunc from './LifeCycleFunc';
 import RefSample1 from './RefSample1';
@@ -26,6 +27,8 @@ function App() {
       <LifeCycleFunc />
 
       <LifeCycleClass />
+
+      <PostList />
     </div>
   );
 }
