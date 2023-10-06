@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function PostItem({ posts }) {
   return (
@@ -16,3 +17,7 @@ export default function PostItem({ posts }) {
     </div>
   );
 }
+
+PostItem.propTypes = {
+  posts: PropTypes.array,
+};
