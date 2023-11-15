@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
       // 새로운 닉네임
       nickObjs[socket.id] = nick;
       console.log(nickObjs, '목록');
-      io.emit('notice', `${nick} 님이 입장하셨습니다.`); // 전체 공지
+      io.emit('notice', { to: 'system', data: `${nick} 님이 입장하셨습니다.` }); // 전체 공지
       socket.emit('entrySuccess', nick); // 해당 소켓 데이터 전송
       updateList();
     }
@@ -55,13 +55,13 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('접속 끊김 :: ', `${nickObjs[socket.id]} 님 퇴장 :: `, socket.id);
 
-    io.emit('notice', `${nickObjs[socket.id]} 님이 퇴장하셨습니다.`);
+    io.emit('notice', { to: 'system', data: `${nickObjs[socket.id]} 님이 퇴장하셨습니다.` });
     delete nickObjs[socket.id];
     updateList();
   });
 
   socket.on('send', (data) => {
-    io.emit('newMessage', data);
+    io.emit('newMessage', { to: nickObjs[socket.id], data });
   });
 
   // [실습4] 채팅창 메세지 전송 Step1

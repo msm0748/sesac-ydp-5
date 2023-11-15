@@ -3,7 +3,6 @@ import io from 'socket.io-client';
 import Chat from './Chat';
 
 const socket = io('http://localhost:8000');
-console.log('실행');
 
 function App() {
   const [nickName, setNickName] = useState('');
@@ -29,7 +28,6 @@ function App() {
     });
 
     socket.on('updateNicks', (nickObjs) => {
-      console.log(nickObjs, 'nickObjs');
       // nickObjs: {socket.id: nick1, socket.id: nick2, ...}
 
       // TODO: nickObjs 반복 돌아서 option 태그 추가
@@ -67,7 +65,7 @@ function App() {
           </button>
         </div>
       </div>
-      {disabled && <Chat userList={userList} socket={socket} />}
+      {disabled && <Chat userList={userList} socket={socket} nickName={nickName} />}
     </div>
   );
 }
