@@ -18,7 +18,7 @@ const io = new Server(httpServer, {
 const nickObjs = {};
 
 function updateList() {
-  io.emit('updateNick', nickObjs); // 전체 사용자 닉네임 모음 객체
+  io.emit('updateNicks', nickObjs); // 전체 사용자 닉네임 모음 객체
 }
 
 io.on('connection', (socket) => {
@@ -59,6 +59,14 @@ io.on('connection', (socket) => {
     delete nickObjs[socket.id];
     updateList();
   });
+
+  socket.on('send', (data) => {
+    io.emit('newMessage', data);
+  });
+
+  // [실습4] 채팅창 메세지 전송 Step1
+  // send 이벤트를 받아서
+  // 모두에게 newMessage 이벤트로 {닉네임, 입력창 내용} 데이터를 전송
 });
 
 httpServer.listen(PORT, () => {

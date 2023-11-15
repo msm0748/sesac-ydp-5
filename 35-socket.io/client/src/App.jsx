@@ -3,15 +3,12 @@ import io from 'socket.io-client';
 import Chat from './Chat';
 
 const socket = io('http://localhost:8000');
+console.log('실행');
 
 function App() {
-  const [message, setMessage] = useState([]);
   const [nickName, setNickName] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [userList, setUserList] = useState();
-
-  console.log(disabled);
-
   const handleNickName = (e) => {
     setNickName(e.target.value);
   };
@@ -31,7 +28,7 @@ function App() {
       console.log(nick);
     });
 
-    socket.on('updateNick', (nickObjs) => {
+    socket.on('updateNicks', (nickObjs) => {
       console.log(nickObjs, 'nickObjs');
       // nickObjs: {socket.id: nick1, socket.id: nick2, ...}
 
@@ -56,6 +53,7 @@ function App() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:outline-none py-2 px-3"
             onChange={handleNickName}
             maxLength="6"
+            value={nickName}
             disabled={disabled}
           />
         </div>
@@ -69,8 +67,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div>{nickName}</div>
-      {disabled && <Chat userList={userList} />}
+      {disabled && <Chat userList={userList} socket={socket} />}
     </div>
   );
 }
