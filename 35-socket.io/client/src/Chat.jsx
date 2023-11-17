@@ -73,23 +73,43 @@ export default function Chat({ userList, socket, nickName }) {
         </ul>
       </div>
       <div>
-        <select id="nick-list">
-          <option value="all">전체</option>
-          {Object.values(userList).map((value, index) => {
-            if (value !== nickName) {
-              return (
-                <option value="value" key={index}>
-                  {value}
-                </option>
-              );
-            }
-          })}
-        </select>
-        에게
-        <input type="text" onChange={handleOnChange} value={message} ref={inputRef} onKeyUp={handleOnKeyUp} />
-        <button type="button" onClick={handleSendMessage}>
-          전송
-        </button>
+        <div className="flex gap-4 mt-4 items-center">
+          <div>
+            <select id="nick-list" className="border">
+              <option value="all">전체</option>
+              {userList &&
+                Object.values(userList).map((value, index) => {
+                  if (value !== nickName) {
+                    return (
+                      <option value="value" key={index}>
+                        {value}
+                      </option>
+                    );
+                  }
+                })}
+            </select>
+            에게
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={handleOnChange}
+              value={message}
+              ref={inputRef}
+              onKeyUp={handleOnKeyUp}
+              className="border"
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleSendMessage}
+              className="border border-stone-600 px-2 py-1 rounded-md hover:bg-amber-500"
+            >
+              전송
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

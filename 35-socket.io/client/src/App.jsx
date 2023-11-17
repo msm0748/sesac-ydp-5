@@ -13,10 +13,6 @@ function App() {
   };
 
   useEffect(() => {
-    // socket.on('joinRoom', (data) => {
-    //   console.log(data.id);
-    // });
-
     // 닉네임 중복, alert 창 띄우기
     socket.on('error', (data) => {
       alert(data);
