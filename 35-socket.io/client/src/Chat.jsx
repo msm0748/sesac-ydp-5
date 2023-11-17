@@ -5,6 +5,7 @@ export default function Chat({ userList, socket, nickName }) {
   const [data, setData] = useState([]);
   const inputRef = useRef(null);
   const messagesContainerRef = useRef(null);
+  const [selectedValue, setSelectedValue] = useState('');
 
   useEffect(() => {
     socket.on('newMessage', (data) => {
@@ -29,10 +30,19 @@ export default function Chat({ userList, socket, nickName }) {
   const handleOnChange = (e) => {
     setMessage(e.target.value);
   };
+
+  const handleSelect = (e) => {
+    setSelectedValue(e.target.value);
+  };
+
   const handleSendMessage = () => {
     if (message.trim() === '') return;
     // "send" 이벤트 전송 { 닉네임, 입력창 내용 }
-    socket.emit('send', message);
+    const data = {
+      nickName,
+      msg: message,
+    };
+    socket.emit('send', data);
     setMessage('');
     inputRef.current.focus();
   };
@@ -48,24 +58,24 @@ export default function Chat({ userList, socket, nickName }) {
       <div className="bg-cyan-500 h-[600px] overflow-auto" ref={messagesContainerRef}>
         <ul className="flex flex-col gap-1 p-4">
           {data.map((value, index) => {
-            if (value.to === 'system') {
+            if (value.nick === 'system') {
               return (
                 <li key={index} className="text-center">
-                  <span>{value.data}</span>
+                  <span>{value.msg}</span>
                 </li>
               );
-            } else if (nickName === value.to) {
+            } else if (nickName === value.nick) {
               return (
                 <li key={index} className="bg-amber-200 w-fit p-2 rounded-md self-end">
-                  <span>{value.to} : </span>
-                  <span>{value.data}</span>
+                  <span>{value.nick} : </span>
+                  <span>{value.msg}</span>
                 </li>
               );
             } else {
               return (
                 <li key={index} className="bg-white w-fit p-2 rounded-md">
-                  <span>{value.to} : </span>
-                  <span>{value.data}</span>
+                  <span>{value.nick} : </span>
+                  <span>{value.msg}</span>
                 </li>
               );
             }
@@ -75,13 +85,13 @@ export default function Chat({ userList, socket, nickName }) {
       <div>
         <div className="flex gap-4 mt-4 items-center">
           <div>
-            <select id="nick-list" className="border">
+            <select id="nick-list" className="border" onChange={handleSelect} value={selectedValue}>
               <option value="all">전체</option>
               {userList &&
                 Object.values(userList).map((value, index) => {
                   if (value !== nickName) {
                     return (
-                      <option value="value" key={index}>
+                      <option value={value} key={index}>
                         {value}
                       </option>
                     );
